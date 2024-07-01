@@ -17,7 +17,7 @@ const allerta = Allerta_Stencil({
 // });
 
 export const metadata: Metadata = {
-  title: "Missing",
+  title: "LostTracker",
   description: "Missing Persons App",
   icons: {
     icon: ["./favicon.ico?v=4"],
