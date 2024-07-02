@@ -1,20 +1,12 @@
-import dynamic from "next/dynamic";
-import { Hero, About, Why, Contact } from "@/components";
-import { Fragment } from "react";
+import { About, Contact, Hero, Why } from "@/components";
 
 export default function Home() {
-  const DynamicNavbar = dynamic(() => import("../components/Navbar"), {
-    ssr: false,
-    loading: () => <p>Loading..</p>,
-  });
-
   return (
-    <Fragment>
-      <DynamicNavbar />
+    <main className="relative overflow-hidden">
       <Hero />
       <About />
       <Why />
       <Contact />
-    </Fragment>
+    </main>
   );
 }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Allerta_Stencil } from "next/font/google";
 import "./globals.css";
-import { Footer } from "@/components";
+import { Footer, Navbar } from "@/components";
 import { Toaster } from "sonner";
 // import dynamic from "next/dynamic";
 
@@ -30,8 +30,8 @@ export default function RootLayout({
         className={`${allerta.className} bg-dark-100 text-primary-600 relative `}
       >
         <Toaster position="bottom-right" />
-        {/* <DynamicNavbar /> */}
-        <main className="relative overflow-hidden">{children}</main>
+        <Navbar />
+        {children}
         <Footer />
       </body>
     </html>
