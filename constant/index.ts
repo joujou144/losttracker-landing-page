@@ -2,14 +2,14 @@ import { LatLngTuple } from "leaflet";
 
 // NAVIGATION
 export const NAV_LINKS = [
-  { href: "/#about", key: "about", label: "About" },
-  { href: "/#why", key: "why", label: "Why" },
+  { href: "#about", key: "about", label: "About" },
+  { href: "#why", key: "why", label: "Why" },
   {
     href: "https://react-losttracker.vercel.app",
     key: "missing",
     label: "Missing",
   },
-  { href: "/#contact", key: "contact", label: "Contact" },
+  { href: "#contact", key: "contact", label: "Contact" },
   {
     href: "https://react-losttracker.vercel.app",
     key: "login",
