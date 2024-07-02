@@ -2,6 +2,7 @@ import { LatLngTuple } from "leaflet";
 
 // NAVIGATION
 export const NAV_LINKS = [
+  { href: "/", key: "home", label: "Home" },
   { href: "#about", key: "about", label: "About" },
   { href: "#why", key: "why", label: "Why" },
   {

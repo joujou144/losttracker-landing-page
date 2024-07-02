@@ -1,3 +1,5 @@
+"use client";
+
 import { Heading } from "@/components";
 import {
   ABOUT_HEADLINE,
@@ -7,10 +9,13 @@ import {
   BOX_CONTENT,
 } from "@/constant";
 import Image from "next/image";
+import { useSectionInView } from "@/constant/hooks";
 
 const About = () => {
+  const { ref } = useSectionInView("about", 0.8);
+
   return (
-    <section id="about" className="max-container pt-[5.5rem] pb-8">
+    <section id="about" ref={ref} className="max-container pt-[5.5rem] pb-8">
       <div className="mx-4 flex flex-col gap-6">
         <Heading label="who we are" variant="header-light" />
 

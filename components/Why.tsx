@@ -19,10 +19,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { Fragment } from "react";
+import { useSectionInView } from "@/constant/hooks";
 
 const Why = () => {
+  const { ref } = useSectionInView("why", 0.4);
+
   return (
-    <section id="why" className="xl-container relative pt-[5.5rem]">
+    <section id="why" ref={ref} className="xl-container relative pt-[5.5rem]">
       <div className="max-container">
         <div className="mx-4 lg:flex lg:gap-6 lg:items-start xl:gap-10">
           <div className="lg:w-1/2 border-2 flex flex-col gap-6 lg:justify-between">

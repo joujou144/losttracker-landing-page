@@ -7,9 +7,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
+import { useActiveSectionContext } from "../context/active-section-context";
 
 const Navbar = () => {
   const [bgStyle, setBgStyle] = useState("nav-bg-default");
+  const { activeSection, setActiveSection, setTimeOfLastClick } =
+    useActiveSectionContext();
+
   useEffect(() => {
     const handleScroll = scroll((progress) =>
       progress > 0
@@ -27,10 +31,10 @@ const Navbar = () => {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ ease: easeInOut, duration: 0.8 }}
-      className={`${bgStyle}  z-[999] xl-container fixed right-0 left-0 ease-in duration-300 text-primary-700 font-light`}
+      className={`${bgStyle}  z-[999] xl-container fixed right-0 left-0 ease-in duration-300 font-light`}
     >
       <div className="max-container py-4">
-        <div className="flexBetween mx-4">
+        <div className="mx-4 flexBetween">
           <Link href="/">
             <Image
               src="/Logo-light.svg"
@@ -41,7 +45,57 @@ const Navbar = () => {
             />
           </Link>
 
-          <Navlinks parentStyle="max-lg:hidden flex items-center gap-2" />
+          <ul className="max-lg:hidden flex items-center gap-2">
+            {NAV_LINKS.map(({ label, key, href }, index) => {
+              const isExternal = key === "login" || key === "missing";
+              const isHome = key === "home";
+              return (
+                <motion.li
+                  key={key}
+                  initial={{ y: -100, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ ease: easeInOut, duration: 1 }}
+                  className={classnames({
+                    "nav-links": true,
+                    [`delay-${index}`]: true,
+                  })}
+                >
+                  {isExternal ? (
+                    <Link href={href} rel="noopener noreferrer" target="_blank">
+                      {label}
+                    </Link>
+                  ) : (
+                    <Link
+                      href={href}
+                      className={classnames({
+                        "text-primary-300": activeSection === key,
+                      })}
+                      onClick={() => {
+                        setActiveSection(key);
+                        setTimeOfLastClick(Date.now());
+                      }}
+                    >
+                      {!isHome && label}
+
+                      {key === activeSection && key !== "home" && (
+                        <motion.span
+                          className="bg-dark-500 rounded-full absolute inset-0 -z-10"
+                          layoutId="activeSection"
+                          transition={{
+                            type: "spring",
+                            stiffness: 380,
+                            damping: 30,
+                          }}
+                        ></motion.span>
+                      )}
+                    </Link>
+                  )}
+                </motion.li>
+              );
+            })}
+          </ul>
+
+          {/* <Navlinks parentStyle="max-lg:hidden flex items-center gap-2" /> */}
 
           {/* Mobile button */}
           {/* <MobileMenu className="lg:hidden cursor-pointer z-10" /> */}
@@ -51,62 +105,17 @@ const Navbar = () => {
   );
 };
 
-type StyleProps = {
-  parentStyle?: string;
-  linkStyle?: string;
-  onClick?: () => void;
-  isMobile?: boolean;
-};
+// .mobile-links {
+//   @apply mr-20 text-right uppercase cursor-pointer text-[20px] content-font tracking-wider font-light text-primary-700 hover:text-gray-50 mb-6 transition-all duration-700 ease-in;
+// }
 
-const Navlinks = ({
-  parentStyle,
-  onClick,
-  isMobile,
-  linkStyle,
-}: StyleProps) => {
-  const [activeSection, setActiveSection] = useState("About");
-  return (
-    <ul className={parentStyle}>
-      {NAV_LINKS.map(({ label, href, key }, index) => {
-        const isExternal = key === "login" || key === "missing";
-        return (
-          <li
-            key={key}
-            className={classnames(`${linkStyle}`, {
-              "nav-links": true,
-              "mobile-links": isMobile,
-              [`delay-${index}`]: isMobile,
-            })}
-          >
-            {isExternal ? (
-              <Link
-                onClick={onClick}
-                href={href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                {label}
-              </Link>
-            ) : (
-              <Link
-                className={classnames("px-4 py-2", {
-                  "bg-[#d5d4d491] opacity-35 rounded-full":
-                    activeSection === label,
-                })}
-                onClick={() => {
-                  setActiveSection(label);
-                }}
-                href={href}
-              >
-                {label}
-              </Link>
-            )}
-          </li>
-        );
-      })}
-    </ul>
-  );
-};
+// .mobile-menu {
+//   @apply lg:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-end text-right items-center h-svh w-full bg-gray-70 transition-all ease-in duration-500 opacity-100 pointer-events-auto;
+// }
+
+// .mobile-menu-close {
+//   @apply lg:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-end items-center h-svh w-full bg-gray-70 transition-all ease-in duration-500 opacity-0 pointer-events-none;
+// }
 
 // const MobileMenu = ({ className }: { className: string }) => {
 //   const [openMenu, setOpenMenu] = useState(false);

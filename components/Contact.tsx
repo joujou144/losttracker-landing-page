@@ -1,10 +1,15 @@
+"use client";
+
 import { ContactForm, Heading } from "@/components";
 import { CONTACT, FOOTER_LINKS } from "@/constant";
 import Image from "next/image";
+import { useSectionInView } from "@/constant/hooks";
 
 const Contact = () => {
+  const { ref } = useSectionInView("contact", 0.5);
+
   return (
-    <section id="contact" className="xl-container bg-slate-300 ">
+    <section id="contact" ref={ref} className="xl-container bg-slate-300 ">
       <div className="max-container">
         <div className="mx-4 py-10 flex flex-col min-[800px]:flex-row min-[800px]:justify-between gap-6">
           <ContactInformation className="min-[800px]:w-[62%] flex flex-col justify-between min-[800px]:pr-4" />

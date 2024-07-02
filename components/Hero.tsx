@@ -4,10 +4,16 @@ import { HERO_HEADLINE, HERO_SUBTEXT } from "@/constant";
 import Image from "next/image";
 import { Button } from "@/components";
 import Link from "next/link";
+import { useSectionInView } from "@/constant/hooks";
 
 const Hero = () => {
+  const { ref } = useSectionInView("home", 0.5);
   return (
-    <section className="xl-container text-primary-600 relative flex items-center justify-center py-80">
+    <section
+      id="home"
+      ref={ref}
+      className="xl-container text-primary-600 relative flex items-center justify-center py-80"
+    >
       <div className="z-10 absolute inset-0 bg-gray-200 opacity-70 " />
       <Image src="/hero.jpg" alt="background image" fill />
       <div className="mx-4 w-fit flex flex-col items-start gap-6 lg:items-center lg:text-center lg:mx-auto">

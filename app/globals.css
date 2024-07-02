@@ -26,24 +26,24 @@ html {
   font-family: "Assistant", sans-serif;
 }
 
-.delay-0 {
-  transition-delay: 0.2s;
-}
-
 .delay-1 {
-  transition-delay: 0.3s;
-}
-
-.delay-2 {
-  transition-delay: 0.4s;
-}
-
-.delay-3 {
   transition-delay: 0.5s;
 }
 
-.delay-4 {
+.delay-2 {
   transition-delay: 0.6s;
+}
+
+.delay-3 {
+  transition-delay: 0.7s;
+}
+
+.delay-4 {
+  transition-delay: 0.8s;
+}
+
+.delay-5 {
+  transition-delay: 0.9s;
 }
 
 @layer utilities {
@@ -78,7 +78,7 @@ html {
   /* NAVIGATION */
 
   .nav-links {
-    @apply uppercase text-sm cursor-pointer content-font tracking-wider transition-all hover:text-gray-20 text-primary-700;
+    @apply relative uppercase px-4 py-2 text-sm cursor-pointer content-font tracking-wider transition-all hover:text-gray-20 text-primary-700;
   }
 
   .nav-bg-onscroll {
