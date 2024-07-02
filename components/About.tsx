@@ -10,7 +10,7 @@ import Image from "next/image";
 
 const About = () => {
   return (
-    <section id="about" className="max-container pt-[5.5rem]">
+    <section id="about" className="max-container pt-[5.5rem] pb-8">
       <div className="mx-4 flex flex-col gap-6">
         <Heading label="who we are" variant="header-light" />
 

@@ -25,9 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="!scroll-smooth">
       <body
-        className={`${allerta.className} bg-dark-100 text-primary-600 relative `}
+        className={`${allerta.className} bg-dark-100 text-primary-600 relative`}
       >
         <Toaster position="bottom-right" />
         <Navbar />

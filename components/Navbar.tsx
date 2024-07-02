@@ -10,7 +10,6 @@ import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
 
 const Navbar = () => {
   const [bgStyle, setBgStyle] = useState("nav-bg-default");
-
   useEffect(() => {
     const handleScroll = scroll((progress) =>
       progress > 0
@@ -42,10 +41,10 @@ const Navbar = () => {
             />
           </Link>
 
-          <Navlinks parentStyle="max-lg:hidden flex items-center gap-6" />
+          <Navlinks parentStyle="max-lg:hidden flex items-center gap-2" />
 
           {/* Mobile button */}
-          <MobileMenu className="lg:hidden cursor-pointer z-10" />
+          {/* <MobileMenu className="lg:hidden cursor-pointer z-10" /> */}
         </div>
       </div>
     </motion.nav>
@@ -65,6 +64,7 @@ const Navlinks = ({
   isMobile,
   linkStyle,
 }: StyleProps) => {
+  const [activeSection, setActiveSection] = useState("About");
   return (
     <ul className={parentStyle}>
       {NAV_LINKS.map(({ label, href, key }, index) => {
@@ -88,7 +88,16 @@ const Navlinks = ({
                 {label}
               </Link>
             ) : (
-              <Link onClick={onClick} href={href}>
+              <Link
+                className={classnames("px-4 py-2", {
+                  "bg-[#d5d4d491] opacity-35 rounded-full":
+                    activeSection === label,
+                })}
+                onClick={() => {
+                  setActiveSection(label);
+                }}
+                href={href}
+              >
                 {label}
               </Link>
             )}
@@ -99,50 +108,50 @@ const Navlinks = ({
   );
 };
 
-const MobileMenu = ({ className }: { className: string }) => {
-  const [openMenu, setOpenMenu] = useState(false);
-  return (
-    <Fragment>
-      <button
-        className={className}
-        onClick={() => {
-          setOpenMenu(!openMenu);
-        }}
-      >
-        <IoMenuSharp
-          size={25}
-          className={classnames({
-            "opacity-100 absolute top-6": !openMenu,
-            "opacity-0 absolute": openMenu,
-          })}
-        />
-        <IoCloseSharp
-          size={30}
-          className={classnames({
-            "text-primary-700 rotate-90 opacity-100 transition-all duration-500 ease-in":
-              openMenu,
-            "opacity-0": !openMenu,
-          })}
-        />
-      </button>
+// const MobileMenu = ({ className }: { className: string }) => {
+//   const [openMenu, setOpenMenu] = useState(false);
+//   return (
+//     <Fragment>
+//       <button
+//         className={className}
+//         onClick={() => {
+//           setOpenMenu(!openMenu);
+//         }}
+//       >
+//         <IoMenuSharp
+//           size={25}
+//           className={classnames({
+//             "opacity-100 absolute top-6": !openMenu,
+//             "opacity-0 absolute": openMenu,
+//           })}
+//         />
+//         <IoCloseSharp
+//           size={30}
+//           className={classnames({
+//             "text-primary-700 rotate-90 opacity-100 transition-all duration-500 ease-in":
+//               openMenu,
+//             "opacity-0": !openMenu,
+//           })}
+//         />
+//       </button>
 
-      <div
-        className={classnames({
-          "mobile-menu": openMenu,
-          "mobile-menu-close": !openMenu,
-        })}
-      >
-        <Navlinks
-          isMobile
-          linkStyle={classnames({
-            "opacity-0": !openMenu,
-            "translate-x-14 opacity-100": openMenu,
-          })}
-          onClick={() => setOpenMenu(false)}
-        />
-      </div>
-    </Fragment>
-  );
-};
+//       <div
+//         className={classnames({
+//           "mobile-menu": openMenu,
+//           "mobile-menu-close": !openMenu,
+//         })}
+//       >
+//         <Navlinks
+//           isMobile
+//           linkStyle={classnames({
+//             "opacity-0": !openMenu,
+//             "translate-x-14 opacity-100": openMenu,
+//           })}
+//           onClick={() => setOpenMenu(false)}
+//         />
+//       </div>
+//     </Fragment>
+//   );
+// };
 
 export default Navbar;

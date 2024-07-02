@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <section className="xl-container text-primary-600 relative flex items-center justify-center h-svh lg:h-screen">
+    <section className="xl-container text-primary-600 relative flex items-center justify-center py-80">
       <div className="z-10 absolute inset-0 bg-gray-200 opacity-70 " />
       <Image src="/hero.jpg" alt="background image" fill />
       <div className="mx-4 w-fit flex flex-col items-start gap-6 lg:items-center lg:text-center lg:mx-auto">
