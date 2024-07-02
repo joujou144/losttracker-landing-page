@@ -15,7 +15,7 @@ export const NAV_LINKS = [
     key: "login",
     label: "Login",
   },
-];
+] as const;
 
 // HERO HEADLINE
 export const HERO_HEADLINE = "Missing Persons Platform";

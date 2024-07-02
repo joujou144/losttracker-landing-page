@@ -2,69 +2,39 @@
 
 import { NAV_LINKS } from "@/constant";
 import classnames from "classnames";
+import { easeInOut, motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
-import { Fragment } from "react";
-import { Suspense } from "react";
 
 const Navbar = () => {
-  const [bgStyle, setBgStyle] = useState("nav-bg-default");
-
-  useEffect(() => {
-    const changeColor = () => {
-      if (typeof window !== "undefined" && window.scrollY >= 150) {
-        setBgStyle("nav-bg-onscroll");
-      } else {
-        setBgStyle("nav-bg-default");
-      }
-    };
-
-    const handleScroll = () => {
-      if (typeof window !== "undefined") {
-        changeColor();
-        if (window.scrollY === 0) {
-          if (window.location.hash) {
-            history.replaceState(null, "", " ");
-          }
-        }
-      }
-    };
-
-    if (typeof window !== "undefined") {
-      window.addEventListener("scroll", handleScroll);
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, []);
-
   return (
-    <Suspense>
-      <nav
-        className={`${bgStyle} z-30 xl-container fixed right-0 left-0 ease-in duration-300 text-cream font-light`}
-      >
-        <div className="max-container py-4">
-          <div className="flexBetween mx-4">
-            <Link href="/">
-              <Image
-                src="/Logo-light.svg"
-                alt="LostInNL-logo"
-                width={100}
-                height={100}
-                className="w-auto h-auto"
-              />
-            </Link>
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ ease: easeInOut, duration: 0.8 }}
+      className={`bg-gray-200 backdrop-filter backdrop-blur-md bg-opacity-10 border-b-[1px] border-primary-700 z-[999] xl-container fixed right-0 left-0 ease-in duration-300 text-primary-700 font-light`}
+    >
+      <div className="max-container py-4">
+        <div className="flexBetween mx-4">
+          <Link href="/">
+            <Image
+              src="/Logo-light.svg"
+              alt="LostInNL-logo"
+              width={100}
+              height={100}
+              className="w-auto h-auto"
+            />
+          </Link>
 
-            <Navlinks parentStyle="max-lg:hidden flex items-center gap-6" />
+          <Navlinks parentStyle="max-lg:hidden flex items-center gap-6" />
 
-            {/* Mobile button */}
-            <MobileMenu className="lg:hidden cursor-pointer z-10" />
-          </div>
+          {/* Mobile button */}
+          <MobileMenu className="lg:hidden cursor-pointer z-10" />
         </div>
-      </nav>
-    </Suspense>
+      </div>
+    </motion.nav>
   );
 };
 

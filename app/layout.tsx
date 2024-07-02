@@ -11,11 +11,6 @@ const allerta = Allerta_Stencil({
   preload: false,
 });
 
-// const DynamicNavbar = dynamic(() => import("../components/Navbar"), {
-//   ssr: false,
-//   loading: () => <p>Loading..</p>,
-// });
-
 export const metadata: Metadata = {
   title: "LostTracker",
   description: "Missing Persons App",

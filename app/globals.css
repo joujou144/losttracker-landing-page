@@ -81,14 +81,6 @@ html {
     @apply uppercase text-sm cursor-pointer content-font tracking-wider transition-all hover:text-gray-20 text-primary-700;
   }
 
-  .nav-bg-onscroll {
-    @apply bg-gray-200 backdrop-filter backdrop-blur-md bg-opacity-50 border-b-0;
-  }
-
-  .nav-bg-default {
-    @apply bg-transparent border-b-[1px] border-gray-20;
-  }
-
   .mobile-links {
     @apply mr-20 text-right uppercase cursor-pointer text-[20px] content-font tracking-wider font-light text-primary-700 hover:text-gray-50 mb-6 transition-all duration-700 ease-in;
   }
