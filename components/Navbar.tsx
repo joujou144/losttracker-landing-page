@@ -2,19 +2,33 @@
 
 import { NAV_LINKS } from "@/constant";
 import classnames from "classnames";
-import { easeInOut, motion } from "framer-motion";
+import { easeInOut, motion, scroll } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { IoCloseSharp, IoMenuSharp } from "react-icons/io5";
 
 const Navbar = () => {
+  const [bgStyle, setBgStyle] = useState("nav-bg-default");
+
+  useEffect(() => {
+    const handleScroll = scroll((progress) =>
+      progress > 0
+        ? setBgStyle("nav-bg-onscroll")
+        : setBgStyle("nav-bg-default")
+    );
+
+    const cancel = scroll(handleScroll);
+
+    cancel();
+  }, []);
+
   return (
     <motion.nav
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ ease: easeInOut, duration: 0.8 }}
-      className={`bg-gray-200 backdrop-filter backdrop-blur-md bg-opacity-10 border-b-[1px] border-primary-700 z-[999] xl-container fixed right-0 left-0 ease-in duration-300 text-primary-700 font-light`}
+      className={`${bgStyle}  z-[999] xl-container fixed right-0 left-0 ease-in duration-300 text-primary-700 font-light`}
     >
       <div className="max-container py-4">
         <div className="flexBetween mx-4">
